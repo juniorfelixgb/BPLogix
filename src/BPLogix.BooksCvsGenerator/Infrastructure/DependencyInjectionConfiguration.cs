@@ -1,6 +1,7 @@
 ﻿using BPLogix.BooksCvsGenerator.Infrastructure.Abstracts;
 using BPLogix.BooksCvsGenerator.Infrastructure.Http;
 using BPLogix.BooksCvsGenerator.Infrastructure.Manager;
+using BPLogix.BooksCvsGenerator.Infrastructure.Middlewares;
 using BPLogix.BooksCvsGenerator.Infrastructure.Providers;
 using FastEndpoints.Swagger;
 using MediatR;
@@ -16,11 +17,19 @@ namespace BPLogix.BooksCvsGenerator.Infrastructure
         {
             services.AddMediatRConfiguration(configuration)
                     .AddInfrastructureConfiguration(configuration)
-                    .AddHttpClientConfiguration(configuration);
+                    .AddHttpClientConfiguration(configuration)
+                    .AddFastEndpointsConfiguration(configuration)
+                    .AddMiddlewareConfiguration();
             return services;
         }
 
-        public static IServiceCollection AddFastEndpointsConfiguration(this IServiceCollection services, IConfiguration configuration)
+        private static IServiceCollection AddMiddlewareConfiguration(this IServiceCollection services)
+        {
+            services.AddScoped<ErrorHandlerMiddleware>();
+            return services;
+        }
+
+        private static IServiceCollection AddFastEndpointsConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
             services.SwaggerDocument(o =>
             {

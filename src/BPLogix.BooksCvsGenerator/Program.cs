@@ -3,6 +3,7 @@ using BPLogix.BooksCvsGenerator.Infrastructure;
 using FastEndpoints.Swagger;
 using FastEndpoints;
 using System.Text.Json;
+using BPLogix.BooksCvsGenerator.Infrastructure.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,5 +34,7 @@ app.UseRouting();
 app.UseOpenApi();
 app.UseSwaggerGen();
 app.UseSwaggerUi3(c => c.ConfigureDefaults());
+
+app.UseMiddleware<ErrorHandlerMiddleware>();
 
 app.Run();
