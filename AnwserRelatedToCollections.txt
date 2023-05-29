@@ -1,0 +1,8 @@
+In the software development, using C# as a programming language I use 2 collections types:
+
+1. List<T>: is a generic collection that permit storage element of any type an ordered list. The elements can access by index and can be add, delete and modify of efficient way.
+
+2. Dictionary<K, V>: is a generic collection that storage key value pairs, where each key is unique inside of dictionary. Provide a quick
+search of a specific value using a specific key.
+
+The principal differences between both collections is focused on your structure and your use.
